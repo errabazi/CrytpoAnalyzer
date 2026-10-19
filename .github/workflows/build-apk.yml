@@ -7,6 +7,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -19,12 +20,11 @@ jobs:
 
       - name: Install Android SDK
         uses: android-actions/setup-android@v3
-
-      - name: Accept Android SDK licenses
-        run: yes | sdkmanager --licenses
+        with:
+          accept-android-sdk-licenses: "true"
 
       - name: Install SDK packages
-        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"-tools;35.0.0"
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
       - name: Extract project
         run: |
