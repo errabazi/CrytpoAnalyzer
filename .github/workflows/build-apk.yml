@@ -22,17 +22,15 @@ jobs:
         uses: android-actions/setup-android@v3
         with:
           accept-android-sdk-licenses: "false"
-          packages: ""
 
-      - name: Accept licenses and install SDK packages
+      - name: Accept Android SDK licenses
         shell: bash
         run: |
-          yes | sdkmanager --licenses >/dev/null
-          2>&1 || true
-          sdkmanager --install \
-            "platform-tools" \
-            "platforms;android-35" \
-            "build-tools;35.0.0"
+          python3 -c 'import subprocess; p = subprocess.Popen(["sdkmanager", "--licenses"], stdin=subprocess.PIPE, text=True); p.communicate(input=("y\n" * 100)); exit(p.returncode)'
+
+      - name: Install SDK packages
+        run: |
+          sdkmanager --install "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 
       - name: Extract project
         run: |
