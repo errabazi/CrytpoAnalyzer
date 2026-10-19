@@ -7,7 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,17 +22,14 @@ jobs:
 
       - name: Accept Android SDK licenses
         shell: bash
-        run: |
-          yes | sdkmanager --licenses || true
-
-            - name: Accept Android SDK licenses
-        
+        run: yes | sdkmanager --licenses || true
 
       - name: Install SDK packages
-        run: |
-          sdkmanager --install "platforms;android-35" "build-tools;35.0.0"
+        shell: bash
+        run: sdkmanager --install "platforms;android-35" "build-tools;35.0.0"
 
       - name: Extract project
+        shell: bash
         run: |
           unzip -o BitgetCryptoAnalyzer-Android-Source.zip -d .
           test -f BitgetCryptoAnalyzer/build.gradle.kts
