@@ -38,7 +38,7 @@ jobs:
 
       - name: Extract project
         run: |
-          unzip -o BitgetCryptoAnalyzer.zip -d .
+          unzip -o BitgetCryptoAnalyzer-New-Project-No-Workflow.zip -d .
           test -f BitgetCryptoAnalyzer/build.gradle.kts
 
       - name: Set up Gradle
